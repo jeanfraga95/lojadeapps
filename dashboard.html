@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 style="color: white; margin: 30px 0;">📱 Dashboard - {{ current_user.username }}</h1>
+
+<!-- Upload Form -->
+<div class="upload-form">
+    <h3>🚀 Enviar Novo App</h3>
+    <form method="POST" action="{{ url_for('upload_app') }}" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="text" name="name" placeholder="Nome do App" required>
+        </div>
+        <div class="form-group">
+            <textarea name="description" placeholder="Descrição" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="file" name="file" class="file-input" accept=".apk,.zip" required>
+        </div>
+        <button type="submit" class="btn-primary">📤 Enviar App</button>
+    </form>
+</div>
+
+<!-- Meus Apps -->
+<h3 style="color: white; margin: 30px 0;">📋 Meus Apps</h3>
+{% for app in apps %}
+<div class="app-card">
+    <h3 class="app-name">{{ app[2] }}</h3>
+    <p class="app-desc">{{ app[3] }}</p>
+    <p><strong>📁 Arquivo:</strong> {{ app[4] }} | <strong>📥 Downloads:</strong> {{ app[6] }}</p>
+    <a href="{{ url_for('download_app', app_id=app[0]) }}" class="download-btn">📲 Baixar</a>
+</div>
+{% endfor %}
+{% endblock %}
