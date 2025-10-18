@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <h1 style="text-align: center; color: white; margin: 50px 0;">Bem-vindo à AppStore! 🎉</h1>
+</div>
+
+<h2 style="color: white; margin: 30px 0;">📱 Apps Populares</h2>
+{% for app in apps %}
+<div class="app-card">
+    <h3 class="app-name">{{ app[2] }}</h3>
+    <p class="app-desc">{{ app[3] }}</p>
+    <p><strong>📥 Downloads:</strong> {{ app[6] }}</p>
+    <a href="{{ url_for('download_app', app_id=app[0]) }}" class="download-btn">📲 Baixar App</a>
+</div>
+{% endfor %}
+{% endblock %}
